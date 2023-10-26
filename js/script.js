@@ -1,17 +1,18 @@
 const showInputBookBtn = document.querySelector(".add-task button"),
   inputBook = document.querySelector(".add-book"),
   readMenu = document.querySelectorAll(".list .title button"),
-  addBookBtn = document.querySelector(".add-button button"),
-  bookNameInput = document.querySelector(".book-name"),
-  bookAuthorInput = document.querySelector(".author"),
-  bookYearInput = document.querySelector(".year"),
-  checkbox = document.querySelector(".checkbox input");
+  addBookBtn = document.querySelector(".add-button button");
 (bookListContainer = document.querySelector(".list-book")),
   (bookList = document.querySelectorAll(".book")),
   (notification = document.querySelector(".notification")),
   ((searchInput = document.querySelector(".search-book")),
   (books = document.querySelector(".about-book p"))),
   (dateText = document.querySelector(".date p"));
+
+let bookNameInput = document.querySelector(".book-name"),
+  bookAuthorInput = document.querySelector(".author"),
+  bookYearInput = document.querySelector(".year"),
+  checkbox = document.querySelector(".checkbox input");
 
 let isComplete = false;
 
@@ -33,6 +34,11 @@ document.addEventListener("click", (e) => {
   // menghapus buku
   if (e.target.classList.contains("delete")) {
     deleteBook(uniqueId.value);
+  }
+
+  // mengedit buku
+  if (e.target.classList.contains("edit")) {
+    editBook(uniqueId.value);
   }
 
   // pindahkan buku ke rak "Sudah dibaca"
@@ -70,6 +76,54 @@ const deleteBook = (id) => {
   showNofitication(false);
 };
 
+// fungsi edit buku
+const editBook = (id) => {
+  let uniqueId = document.querySelector(".unique-id-cloning");
+  let localData = getLocalData();
+
+  showInputBookBtn.classList.add("disable");
+  localData = localData.filter((data) => {
+    if (data.id === id) {
+      data.id = id;
+      return data;
+    }
+  });
+
+  uniqueId.value = id;
+  bookNameInput.value = localData[0].title;
+  bookAuthorInput.value = localData[0].author;
+  bookYearInput.value = localData[0].year;
+  checkbox.checked = localData[0].isComplete;
+
+  addBookBtn.innerText = "Simpan";
+  inputBook.classList.remove("hidden");
+
+  hideAllButtons();
+};
+
+// fungsi menyimpan data yang diedit
+const saveBookData = (id) => {
+  let localData = getLocalData();
+
+  localData = localData.filter((data) => {
+    if (data.id === id) {
+      data.id = id;
+      data.title = bookNameInput.value;
+      data.author = bookAuthorInput.value;
+      data.year = bookYearInput.value;
+      data.isComplete = checkbox.checked;
+    }
+    return data;
+  });
+
+  bookListContainer.innerHTML = "";
+  localStorage.setItem("booksList", JSON.stringify(localData));
+  localData.forEach((data) => {
+    saveToHtml(data, isComplete);
+  });
+  getLocalStorageData(isComplete);
+};
+
 // fungsi mengubah status buku
 const changeBookStatus = (id, status) => {
   let localData = getLocalData();
@@ -87,7 +141,16 @@ const changeBookStatus = (id, status) => {
 
 // ketika tombol tambah diklik
 addBookBtn.addEventListener("click", (e) => {
-  if (bookNameInput.value === "" || bookYearInput.value === "") {
+  if (addBookBtn.innerText === "Simpan") {
+    saveButton(e);
+    return;
+  }
+
+  if (
+    bookNameInput.value === "" ||
+    bookYearInput.value === "" ||
+    bookAuthorInput.value === ""
+  ) {
     return;
   }
 
@@ -107,16 +170,30 @@ addBookBtn.addEventListener("click", (e) => {
   saveToLocalStorage(books);
   showNofitication(true);
 
-  bookNameInput.value = "";
-  bookAuthorInput.value = "";
-  bookYearInput.value = "";
+  restartInput();
   checkbox.checked = false;
 });
+
+// fungsi tombol simpan
+const saveButton = (e) => {
+  e.preventDefault();
+  let uniqueId = document.querySelector(".unique-id-cloning");
+  saveBookData(uniqueId.value);
+
+  restartInput();
+  checkbox.checked = false;
+
+  addBookBtn.innerText = "Tambah";
+  inputBook.classList.add("hidden");
+  showInputBookBtn.classList.remove("disable");
+  searchInput.value = "";
+  showNofitication(true);
+};
 
 // fungsi tampilkan notifikasi
 const showNofitication = (status) => {
   notification.querySelector("p").innerText = status
-    ? "Data berhasil ditambahkan!"
+    ? "Data berhasil disimpan!"
     : "Data berhasil dihapus!";
   notification.classList.add("show");
   setTimeout(() => {
@@ -143,6 +220,7 @@ const saveToHtml = (data, status) => {
     </div>
     <div class="hidden-button hidden">
       <button class="delete">Hapus</button>
+      <button class="edit">Edit</button>
       <button class="${buttonClass}">${buttonLabel}</button>
     </div>
   </div>`;
@@ -169,7 +247,6 @@ readMenu.forEach((btn) => {
     }
 
     if (searchInput.value) {
-      console.log(searchInput.value);
       searchDataInput(searchInput.value);
       return;
     }
@@ -256,11 +333,20 @@ const saveToLocalStorage = (books) => {
   getLocalStorageData(isComplete);
 };
 
+// funsgi mendapatkan data local
 const getLocalData = () => {
   let localData = localStorage.getItem("booksList");
   return JSON.parse(localData);
 };
 
+// fungsi mengkosongkan input
+const restartInput = () => {
+  bookNameInput.value = "";
+  bookYearInput.value = "";
+  bookAuthorInput.value = "";
+};
+
+//  fungsi mendapatkan tanggal dan bulan lokal
 const getDateNow = () => {
   const date = new Date();
   const monthNames = [
