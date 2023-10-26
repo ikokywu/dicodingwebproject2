@@ -13,7 +13,7 @@ let bookNameInput = document.querySelector(".book-name"),
   bookAuthorInput = document.querySelector(".author"),
   bookYearInput = document.querySelector(".year"),
   checkbox = document.querySelector(".checkbox input");
-("Hilangkan");
+
 let isComplete = false;
 
 document.addEventListener("click", (e) => {
