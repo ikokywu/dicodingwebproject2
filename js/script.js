@@ -141,16 +141,16 @@ const changeBookStatus = (id, status) => {
 
 // ketika tombol tambah diklik
 addBookBtn.addEventListener("click", (e) => {
-  if (addBookBtn.innerText === "Simpan") {
-    saveButton(e);
-    return;
-  }
-
   if (
     bookNameInput.value === "" ||
     bookYearInput.value === "" ||
     bookAuthorInput.value === ""
   ) {
+    return;
+  }
+
+  if (addBookBtn.innerText === "Simpan") {
+    saveButton(e);
     return;
   }
 
