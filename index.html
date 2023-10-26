@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Rak Buku</title>
+   <link rel="stylesheet" href="styles/style.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+   <main>
+      <div class="content">
+         <header>
+            <div class="date">
+               <p></p>
+            </div>
+            <div class="about">
+               <div class="about-book">
+                  <h2>Rak Buku</h2>
+                  <p></p>
+               </div>
+
+               <div class="add-task">
+                  <button>Tambah Buku</button>
+               </div>
+            </div>
+         </header>
+
+         <div class="input-book">
+            <div class="notification">
+               <p></p>
+            </div>
+            <form action="#" class="add-book hidden">
+               <input class="book-name" type="text" placeholder="Nama buku" required>
+               <input class="author" type="text" placeholder="Pembuat" required>
+               <input class="year" type="number" placeholder="Tahun" required>
+               <div class="checkbox">
+                  <input type="checkbox" id="read">
+                  <label for="read">Sudah dibaca</label>
+               </div>
+               <div class="add-button">
+                  <button>Tambah</button>
+               </div>
+            </form>
+
+            <input type="text" class="search-book" placeholder="Cari buku">
+         </div>
+
+         <div class="bookshelf">
+            <div class="list">
+               <div class="title">
+                  <button class="unread active">Belum dibaca</button>
+                  <button class="read">Sudah dibaca</button>
+               </div>
+               
+               <div class="list-book">
+               </div>
+            </div>
+         </div>
+      </div>
+   </main>
+
+   <script src="js/script.js"></script>
+</body>
+</html>

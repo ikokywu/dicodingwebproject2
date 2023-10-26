@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Lato:wght@400;700&family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600&family=Roboto+Slab:wght@400;700&family=Roboto:ital,wght@0,300;0,700;1,500&display=swap');
+
+:root {
+   --main-bg: #5D12D2;
+   --text-color: #fff
+}
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: 'Roboto Slab', serif;
+}
+
+main {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+}
+
+.content {
+   position: relative;
+   height: 100vh;
+   width: 500px;
+   border: 1px solid var(--main-bg);
+   max-height: 100%;
+   overflow: scroll;
+}
+
+.content header {
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   padding: 20px 40px;
+   background-color: var(--main-bg);
+}
+ 
+header .date p {
+   color: var(--text-color);
+}
+
+header .about {
+   width: 100%;
+   margin: 60px 0;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.notification {
+   position: fixed;
+   top: 0;
+   left: 50%;
+   transform: translate(-50%, -100px);
+   display: flex;
+   width: 100%;
+   align-items: center;
+   justify-content: center;
+   transition: all 0.3s ease;
+}
+
+.notification p {
+   padding: 10px 20px;
+   background-color: var(--main-bg);
+   border: 2px solid var(--text-color);
+   border-radius: 5px;
+   color: var(--text-color);
+}
+
+.notification.show {
+   transform: translate(-50%, 20px);
+}
+
+.about .about-book {
+   color: var(--text-color);
+}
+
+.about-book h2 {
+   font-size: 2rem;
+}
+
+.about-book p {
+   color: #ffffffab;
+}
+
+button {
+   font-weight: 700;
+   font-size: 1rem;
+   padding: 17px 35px;
+   border: 2px solid var(--main-bg);
+   border-radius: 7px;
+   background-color: var(--text-color);
+   color: var(--main-bg);
+   transition: all 0.3s ease;
+}
+
+.add-task button:active {
+   background-color: var(--main-bg);
+   color: var(--text-color);
+   border: 2px solid var(--text-color);
+}
+
+.input-book {
+   background-color: var(--text-color);
+   padding: 20px 40px;
+   margin-top: -50px;
+   border-top-left-radius: 45px;
+}
+
+.input-book input {
+   margin-top: 20px;
+   width: 100%;
+   height: 50px;
+   border-radius: 5px;
+   outline: none;
+   border: 1px solid black;
+   padding: 20px;
+   font-size: 1rem;
+}
+
+.checkbox {
+   display: flex;
+   align-items: center;
+   justify-content: start;
+}
+
+.checkbox input {
+   width: auto;
+   padding: 0;
+   margin: 0;
+}
+
+.checkbox label {
+   margin-left: 10px;
+}
+
+.hidden {
+   display: none;
+}
+
+
+.add-button {
+   margin-top: 20px;
+   text-align: end;
+}
+
+.add-button button {
+   background-color: var(--main-bg);
+   padding: 15px 35px;
+   color: var(--text-color);
+}
+
+.add-button button:active {
+   background-color: var(--text-color);
+   padding: 15px 35px;
+   color: var(--main-bg);
+}
+
+.bookshelf {
+   padding: 20px 40px;
+}
+
+.title button.active {
+ background-color: var(--main-bg);
+ color: var(--text-color);
+}
+
+.list .list-book {
+   margin-top: 10px;
+}
+
+.list-book .book {
+   background-color: #dfdfdf;
+   padding: 20px 30px;
+   border-radius: 10px;
+   margin-top: 20px;
+}
+
+.book .information {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.information .book-info {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.information i {
+   font-size: 2.4rem;
+   color: var(--main-bg);
+}
+
+.information .fa-caret-down {
+   color: var(--main-bg);
+   font-size: 1.3rem;
+}
+
+.about-info {
+   margin-left: 20px;
+}
+
+.about-info h3 {
+   font-size: 1.3rem;
+}
+
+.about-info p {
+   margin-top: 5px;
+   font-size: 1rem;
+   color: rgb(85, 83, 83);
+}
+
+.hidden-button {
+   margin-top: 15px;
+}
+
+.hidden-button button {
+   padding: 10px 23px;
+}
+
+.hidden-button button:first-child {
+   background-color: red;
+   color: var(--text-color);
+   border: 2px solid var(--text-color);
+}
+
+.hidden-button button:last-child {
+   background-color: green;
+   color: var(--text-color);
+   border: 2px solid var(--text-color);
+}
+
+.hidden-button button:active {
+   background-color: transparent;
+   color: #5D12D2;
+   border: 2px solid var(--main-bg);
+}
+
+@media screen and (max-width: 767px) {
+   .about-book h2 {
+      font-size: 1.8rem;
+   }
+
+   .about-book p {
+      margin-top: 5px;
+   }
+
+   button {
+      padding: 18px 20px;
+      font-size: 0.9rem;
+   }
+
+   .about-info h3 {
+      font-size: 1.1rem;
+   }
+
+   .about-info p {
+      font-size: 0.9rem;
+   }
+}
