@@ -221,24 +221,22 @@ button {
 
 .hidden-button button {
    padding: 8px 18px;
+   color: var(--text-color);
+   border: 2px solid var(--text-color);
 }
 
 .hidden-button button:first-child {
    background-color: red;
-   color: var(--text-color);
-   border: 2px solid var(--text-color);
 }
 
 .hidden-button button:nth-child(2) {
    background-color: #FFA33C;
-   color: var(--text-color);
-   border: 2px solid var(--text-color);
+   margin-left: 5px;
 }
 
 .hidden-button button:last-child {
    background-color: green;
-   color: var(--text-color);
-   border: 2px solid var(--text-color);
+   margin-left: 5px;
 }
 
 .hidden-button button:active {
@@ -281,5 +279,9 @@ button {
 
    .hidden-button {
       justify-content: space-between;
+   }
+
+   .hidden-button button:last-child, .hidden-button button:nth-child(2) {
+      margin-left: 0;
    }
 }

@@ -201,6 +201,7 @@ const showNofitication = (status) => {
   }, 1200);
 };
 
+// menyimpan data ke html
 const saveToHtml = (data, status) => {
   const buttonLabel = status ? "Undo" : "Selesai",
     buttonClass = status ? "undo" : "completed";
