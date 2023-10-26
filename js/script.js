@@ -81,7 +81,7 @@ const editBook = (id) => {
   let uniqueId = document.querySelector(".unique-id-cloning");
   let localData = getLocalData();
 
-  showInputBookBtn.classList.add("disable");
+  disableBtn(true);
   localData = localData.filter((data) => {
     if (data.id === id) {
       data.id = id;
@@ -151,6 +151,7 @@ addBookBtn.addEventListener("click", (e) => {
 
   if (addBookBtn.innerText === "Simpan") {
     saveButton(e);
+    disableBtn(false);
     return;
   }
 
@@ -185,7 +186,6 @@ const saveButton = (e) => {
 
   addBookBtn.innerText = "Tambah";
   inputBook.classList.add("hidden");
-  showInputBookBtn.classList.remove("disable");
   searchInput.value = "";
   showNofitication(true);
 };
@@ -222,7 +222,7 @@ const saveToHtml = (data, status) => {
     <div class="hidden-button hidden">
       <button class="delete">Hapus</button>
       <button class="edit">Edit</button>
-      <button class="${buttonClass}">${buttonLabel}</button>
+      <button class="change ${buttonClass}">${buttonLabel}</button>
     </div>
   </div>`;
 
@@ -345,6 +345,31 @@ const restartInput = () => {
   bookNameInput.value = "";
   bookYearInput.value = "";
   bookAuthorInput.value = "";
+};
+
+// menonaktifkan tombol
+const disableBtn = (status) => {
+  let deleteBtn = document.querySelectorAll(".hidden-button .delete");
+  let changeBtn = document.querySelectorAll(".hidden-button .change");
+  if (status) {
+    showInputBookBtn.classList.add("disable");
+    deleteBtn.forEach((e) => {
+      e.classList.add("disable");
+    });
+
+    changeBtn.forEach((e) => {
+      e.classList.add("disable");
+    });
+  } else {
+    showInputBookBtn.classList.remove("disable");
+    deleteBtn.forEach((e) => {
+      e.classList.remove("disable");
+    });
+
+    changeBtn.forEach((e) => {
+      e.classList.remove("disable");
+    });
+  }
 };
 
 //  fungsi mendapatkan tanggal dan bulan lokal
